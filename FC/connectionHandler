@@ -1,0 +1,19 @@
+#!/sbin/openrc-run
+
+depend() {
+	after net
+}
+
+start() {
+	ebegin "Starting Connection Handler"
+	start-stop-daemon --background --start --exec /usr/host/hostLoop\
+	--make-pidfile --pidfile /usr/connectionHandler
+	eend $?
+}
+
+stop() {
+    ebegin "Stopping Connection Handler"
+    start-stop-daemon --stop --exec /usr/host/hostLoop
+    eend $?
+}
+
